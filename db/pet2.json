@@ -1,0 +1,18 @@
+{
+  "id": 12333,
+  "category": {
+    "id": 2,
+    "name": "AAAA"
+  },
+  "name": "Mari",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 202125,
+      "name": "data"
+    }
+  ],
+  "status": "sold"
+}
