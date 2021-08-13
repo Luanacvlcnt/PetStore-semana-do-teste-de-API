@@ -4,6 +4,7 @@ package petstore;
 // 2-Bibliotecas
 
 import io.restassured.specification.Argument;
+import org.omg.CORBA.StringHolder;
 import org.testng.annotations.Test;
 
 
@@ -31,7 +32,7 @@ public class Pet {
     }
 
     // Incluir - Create - Post
-    @Test  //identifica o método ou função com um teste para o TestNG
+    @Test (priority = 1)  //identifica o método ou função com um teste para o TestNG
     public void incluirPet() throws IOException {
         String jsonBody = lerJson("db/pet1.json");
 
@@ -50,8 +51,34 @@ public class Pet {
                 .statusCode(200)
                 .body("name", is("Mari"))
                 .body("status", is("available"))
-                .body("category.name", is("dog"))
-                .body("tags.name", contains("sta"))
+                .body("category.name", is("AAAA"))
+                .body("tags.name", contains("data"))
          ;
+    }
+
+    @Test (priority = 2)
+    public  void  consultarPet(){
+        String petId = "12333";
+
+        String token =
+        given()
+                .contentType("application/json")
+                .log().all()
+        .when()
+            .get(uri + "/" + petId)
+
+        .then()
+            .log().all()
+            .statusCode(200)
+            .body("name", is("Mari"))
+            .body("category.name", is("AAAA"))
+            .body("status", is("available"))
+        .extract()
+          .path("category.name")
+
+        ;
+    System.out.println("O token é" + token);
+
+
     }
 }
